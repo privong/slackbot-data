@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `observing_runs`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `observing_runs` (
   `OBSID` int(11) NOT NULL AUTO_INCREMENT,
-  `telscope` varchar(40) NOT NULL,
+  `telescope` varchar(40) NOT NULL,
   `instrument` varchar(40) NOT NULL,
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
