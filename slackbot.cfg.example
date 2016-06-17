@@ -1,0 +1,8 @@
+[Slack]
+APIkey=your-slack-API-key
+
+[SQL]
+server=SQLserver
+DB=database
+user=username
+pass=password
