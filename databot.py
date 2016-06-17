@@ -127,10 +127,11 @@ status = "reduced" or status = "published") and ((telescope = "' + ti + \
                        re.I):
             reply = reply + 'I have the following commands:\n'
             reply = reply + commands[0] + '\n'
+            reply = reply + commands[1] + '\n'
             reply = reply + commands[-1] + '\n'
             for i in range(2, len(commands)-1):
                 reply = reply + commands[i] + ' _____?\n'
-            reply = reply + 'Don\'t forget to prefix your request with \"@databot\"!'
+            reply = reply + '\nDon\'t forget to prefix your request with \"@databot\"!'
         elif re.search("what is your name",
                        inquiry,
                        re.I):
