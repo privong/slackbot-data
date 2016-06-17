@@ -14,8 +14,19 @@ import sys
 import time
 import re
 import os
+import signal
 
 
+def signal_handler(signal, frame):
+    sys.stderr.write("Bot killed.\n")
+    try:
+        sys.stderr.write("Closing database connection.\n")
+        scon.close()
+    except:
+        sys.stderr.write("Error closing database connection.\n")
+    sys.exit(1)
+
+        
 def handlemsg(slackmsg):
     """
     """
@@ -177,8 +188,11 @@ if __name__ == "__main__":
 
     sc = SlackClient(APIkey)
     if sc.rtm_connect():
+        sys.stdout.write("@databot is connected to slack. Listening...\n")
         while True:
             slackmsg = sc.rtm_read()
             if slackmsg != []:
                 handlemsg(slackmsg)
             time.sleep(0.2)
+    else:
+        sys.stderr.write("Error: could not connect to slack. Exiting.\n")
