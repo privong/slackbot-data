@@ -17,13 +17,20 @@ import os
 import signal
 
 
-def signal_handler(signal, frame):
-    sys.stderr.write("Bot killed.\n")
+def shutdown():
+    """
+    Cleanly close MySQL connection.
+    """
     try:
-        sys.stderr.write("Closing database connection.\n")
+        sys.stdout.write("Closing database connection.\n")
         scon.close()
     except:
         sys.stderr.write("Error closing database connection.\n")
+
+
+def signal_handler(signal, frame):
+    sys.stderr.write("Bot killed.\n")
+    shutdown()
     sys.exit(1)
 
         
@@ -170,9 +177,11 @@ status = "reduced" or status = "published") and ((telescope = "' + ti + \
                     channel=msg['channel'],
                     text=reply,
                     as_user=True)
-         if re.search("kill",
-                      inquiry,
-                      re.I):
+
+        if re.search("kill",
+                     inquiry,
+                     re.I):
+            shutdown()
             sys.exit(0)
 
 
