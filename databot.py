@@ -79,14 +79,15 @@ ORDER BY start;'
             scur.execute(query)
             recs = scur.fetchall()
             nwait = len(recs)
-            reply = reply + 'We are waiting on {0:d} observations: '.format(nwait)
+            reply = reply + 'We are waiting on {0:d} observations:'.format(nwait)
             csrc = recs[0][2]
-            reply = reply + csrc + ': '
+            reply = reply + '\n' + csrc + ': '
             for rec in recs:
                 if rec[2] != csrc:
                     csrc = rec[2]
-                    reply = reply + csrc + ': '
+                    reply = reply[:-2] + '\n' + csrc + ': '
                 reply = reply + '+'.join([rec[0], rec[1]]) + ', '
+            reply = reply[:-2]
         elif re.search(commands[2],
                        inquiry,
                        re.I):
