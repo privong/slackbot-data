@@ -34,7 +34,8 @@ def handlemsg(slackmsg):
                 'what data are we waiting on',
                 'how many objects have been observed with',
                 'what datasets are available for',
-                'list all future observing runs']
+                'list all future observing runs',
+                'kill']
 
     BOTID = 'U1EJ9GBJM'
     ATBOT = "<@" + BOTID + ">"
@@ -143,6 +144,10 @@ status = "reduced" or status = "published") and ((telescope = "' + ti + \
             for i in range(2, len(commands)-1):
                 reply = reply + commands[i] + ' _____?\n'
             reply = reply + '\nDon\'t forget to prefix your request with \"@databot\"!'
+        elif re.search("kill",
+                       inquiry,
+                       re.I):
+            reply = "Leaving."
         elif re.search("what is your name",
                        inquiry,
                        re.I):
@@ -165,6 +170,10 @@ status = "reduced" or status = "published") and ((telescope = "' + ti + \
                     channel=msg['channel'],
                     text=reply,
                     as_user=True)
+         if re.search("kill",
+                      inquiry,
+                      re.I):
+            sys.exit(0)
 
 
 if __name__ == "__main__":
