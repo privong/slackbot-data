@@ -224,14 +224,13 @@ if __name__ == "__main__":
         while True:
             try:
                 slackmsg = sc.rtm_read()
+                if slackmsg != []:
+                    handlemsg(slackmsg)
+                time.sleep(0.2)
             except:
                 sys.stderr.write('We seem to have been disconnected.')
                 sys.stderr.write('Sleeping for 10 seconds and reconnecting.\n')
                 time.sleep(10)
                 sc.rtm_connect()
-                slackmsg = sc.rtm_read()
-            if slackmsg != []:
-                handlemsg(slackmsg)
-            time.sleep(0.2)
     else:
         sys.stderr.write("Error: could not connect to slack. Exiting.\n")
