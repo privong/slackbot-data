@@ -222,7 +222,14 @@ if __name__ == "__main__":
     if sc.rtm_connect():
         sys.stdout.write("@databot is connected to slack. Listening...\n")
         while True:
-            slackmsg = sc.rtm_read()
+            try:
+                slackmsg = sc.rtm_read()
+            except:
+                sys.stderr.write('We seem to have been disconnected.')
+                sys.stderr.write('Sleeping for 10 seconds and reconnecting.\n')
+                time.sleep(10)
+                sc.rtm_connect()
+                slackmsg = sc.rtm_read()
             if slackmsg != []:
                 handlemsg(slackmsg)
             time.sleep(0.2)
