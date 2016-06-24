@@ -218,18 +218,24 @@ if __name__ == "__main__":
                            db=SQLdb)
     scur = scon.cursor()
 
+    dcount = 0
+
     sc = SlackClient(APIkey)
     if sc.rtm_connect():
         sys.stdout.write("@databot is connected to slack. Listening...\n")
         while True:
             try:
                 slackmsg = sc.rtm_read()
+                # only count retries between successful disconnections
+                dcount = 0
                 if slackmsg != []:
                     handlemsg(slackmsg)
                 time.sleep(0.2)
             except:
-                sys.stderr.write('We seem to have been disconnected.')
-                sys.stderr.write('Sleeping for 10 seconds and reconnecting.\n')
+                dcount = dcount + 1
+                sys.stderr.write('We are not connected.')
+                sys.stderr.write(' Sleeping for 10 seconds and reconnecting.')
+                sys.stderr.write(' {0:1d} retries to connect.\n'.format(dcount))
                 time.sleep(10)
                 sc.rtm_connect()
     else:
