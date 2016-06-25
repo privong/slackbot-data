@@ -19,6 +19,6 @@ Note that not all of the information contained within the database is accessible
 
 ## Dependencies
 
-* python2.7 (Owing to the MySQL module used, and the lack of testing of strings in python3)
+* python2.7 (Owing to the MySQL module used, and my not having tested the string operations in python3)
 * [MySQL-python](https://pypi.python.org/pypi/MySQL-python/)
 - [python-slackclient](https://github.com/slackhq/python-slackclient)
