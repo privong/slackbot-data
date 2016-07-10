@@ -237,6 +237,7 @@ if __name__ == "__main__":
                 sys.stderr.write(' Sleeping for 10 seconds and reconnecting.')
                 sys.stderr.write(' {0:1d} retries to connect.\n'.format(dcount))
                 time.sleep(10)
+                sc = SlackClient(APIkey)
                 sc.rtm_connect()
     else:
         sys.stderr.write("Error: could not connect to slack. Exiting.\n")
