@@ -20,14 +20,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from slackclient import SlackClient
-import MySQLdb
 import configparser
 import sys
 import time
 import re
 import os
 import signal
+from slackclient import SlackClient
+import MySQLdb
 
 
 def shutdown():
@@ -142,12 +142,12 @@ status = "reduced" or status = "published") and ((telescope = "' + ti + \
             nobs = len(recs)
             if nobs == 0:
                 reply = reply + 'There are no upcoming observing runs.'
-            if nobs == 1:
+            elif nobs == 1:
                 recs = recs[0]
                 reply = reply + 'There is 1 upcoming observing run:\n'
                 reply = reply + recs[3].isoformat() + ' to ' + recs[4].isoformat() + ' at ' + \
                         recs[1] + ' with ' + recs[2] + '.'
-            else:
+            elif nobs > 1:
                 reply = reply + 'There are {0:d} upcoming observing runs:\n'.format(nobs)
                 for i in range(nobs):
                     reply = reply + recs[i][3].isoformat() + ' to ' + recs[i][4].isoformat() + ' at ' + \
