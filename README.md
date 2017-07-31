@@ -19,5 +19,6 @@ Note that not all of the information contained within the database is accessible
 
 ## Dependencies
 
-* [mysqlclient-python](https://github.com/PyMySQL/mysqlclient-python) for python3.X (recommended) or [MySQL-python](https://pypi.python.org/pypi/MySQL-python/) for python 2.X
+* python2 (because python-slackclient does not yet support python 3).
+* [MySQL-python](https://pypi.python.org/pypi/MySQL-python/) for python 2.X
 - [python-slackclient](https://github.com/slackhq/python-slackclient)
